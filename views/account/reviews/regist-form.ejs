@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%- include("../../_share/metadata.ejs") %>
+
+    <title>Document</title>
+    <%- include("../../_share/stylesheets.ejs") %>
+    <link rel="stylesheet" href="/public/stylesheets/index.css" />
+  </head>
+  <body>
+    <div class="outframe">
+      <%- include("../../_share/navbar.ejs") %>
+      <main role="main" class="container">
+        <div class="border-bottom my-5">
+          <h1>口コミの投稿</h1>
+        </div>
+        <div>
+          <form action="/account/reviews/regist/confirm" method="POST">
+            <input
+              type="hidden"
+              id="shopId"
+              name="shopId"
+              value="<%= shopId %>"
+            />
+			<% if(locals.error){ %>
+				<div class="alert alert-danger">
+					<% for(var key in error){ %>
+						<div><i class="fa fa-fw fa-exclamation-circle">
+
+						</i>
+						<%= error[key] %></div>
+						<% } %>
+				</div>
+				
+				<% } %>
+            <div class="form-group row">
+              <label for="shopName" class="col-sm-2 col-form-label"
+                >店舗名</label
+              >
+              <div class="col-sm-10">
+                <input
+                  readonly
+                  type="text"
+                  class="form-control-plaintext"
+                  id="shopName"
+                  name="shopName"
+                  value="<%= shopName %>"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="visit" class="col-sm-2 col-form-label">訪問日</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="visit" name="visit"
+                placeholder="yyyy/mm/dd" value="<%= review.visit ?
+                moment(review.visit).format("YYYY/MM/DD") : "" %>" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="score" class="col-sm-2 col-form-label">評価</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="score" id="score">
+					<option <%=( review.score && review.score === 5.0 ? "selected" : "") %> >5.0</option>
+					<option <%=( review.score && review.score === 4.5 ? "selected" : "" )%> >4.5</option>
+					<option <%=( review.score && review.score === 4.0 ? "selected" : "") %> >4.0</option>
+					<option <%=( review.score && review.score === 3.5 ? "selected" : "") %> >3.5</option>
+					<option <%= ( typeof(review.score)==="undefined" || review.score && review.score === 3.0 ? "selected" : "") %> >3.0</option>
+					<option <%= (review.score && review.score === 2.5 ? "selected" : "") %> >2.5</option>
+					<option <%=( review.score && review.score === 2.0 ?"selected" : "") %> >2.0</option>
+					<option <%=( review.score && review.score === 1.5 ?"selected" : "") %> >1.5</option>
+					<option <%= (review.score && review.score === 1.0 ? "selected" : "") %> >1.0</option>
+					<option <%= (review.score && review.score === 0.5 ? "selected" : "") %> >0.5</option>
+					<option <%= (review.score && review.score === 0.0 ? "selected" : "") %> >0.0</option>
+				</select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 col-form-label"
+                >本文</label
+              >
+              <div class="col-sm-10">
+                <textarea
+                  class="form-control"
+                  name="description"
+                  id="description"
+                  rows="5"
+                >
+				<%= review.description   %>
+			</textarea
+                >
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <input type="submit" value="確認" class="btn btn-primary" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <%- include("../../_share/footer.ejs") %>
+    </div>
+
+    <%- include("../../_share/javascripts.ejs")%>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%- include("../../_share/metadata.ejs") %>
+
+    <title>Document</title>
+    <%- include("../../_share/stylesheets.ejs") %>
+    <link rel="stylesheet" href="/public/stylesheets/index.css" />
+  </head>
+
+  <body>
+    <div class="outframe">
+      <%- include("../../_share/navbar.ejs") %>
+      <main role="main" class="container">
+        <div class="border-bottom my-5">
+          <h1>口コミの投稿</h1>
+        </div>
+        <div class="alert alert-success my-5">投稿が完了しました</div>
+        <div class="text-center my-5">
+          <a class="btn btn-outline-primary" href="/shops/<%= shopId %>"
+            >ショップページへ戻る</a
+          >
+        </div>
+      </main>
+
+      <%- include("../../_share/footer.ejs") %>
+    </div>
+
+    <%- include("../../_share/javascripts.ejs")%>
+    <script src="/public/javascripts/complete.js"></script>
+  </body>
+</html>
